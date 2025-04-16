@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Alphonse</title>
+  <style>/* === Style CSS intégré (raccourci ici pour l'exemple) === */
+body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; color: #333; }
+.hero { position: relative; height: 100vh; overflow: hidden; color: white; display: flex; flex-direction: column; justify-content: center; padding: 0 5%; }
+.hero-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; z-index: 0; }
+.hero-text { position: relative; z-index: 1; }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <img src="images/fond-portfolio.jpg" alt="Image de fond" class="hero-bg">
+    <div class="hero-text">
+      <h1>Alphonse<br>Designer Numérique</h1>
+      <p>Créateur de solutions visuelles et interactives — Design Graphique, UX/UI, 3D & Web.</p>
+    </div>
+  </section>
+  <section class="section fade-in">
+    <h2>À propos</h2>
+    <p>Designer numérique passionné avec expertise en UX/UI, contenu multimédia, 3D, web design.</p>
+  </section>
+  <script>document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const response = document.querySelector(".form-response");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    response.textContent = "Message envoyé avec succès ! Merci ✨";
+    response.style.display = "block";
+    setTimeout(() => {
+      response.style.display = "none";
+      form.reset();
+    }, 4000);
+  });
+  const toggle = document.getElementById("darkToggle");
+  toggle?.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+  });
+  const elements = document.querySelectorAll(".section");
+  const revealOnScroll = () => {
+    const triggerBottom = window.innerHeight * 0.9;
+    elements.forEach(el => {
+      const boxTop = el.getBoundingClientRect().top;
+      if (boxTop < triggerBottom) {
+        el.classList.add("visible");
+      }
+    });
+  };
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll();
+  const langToggle = document.getElementById("langToggle");
+  let isFR = true;
+  langToggle?.addEventListener("click", () => {
+    const labels = document.querySelectorAll("[data-fr]");
+    labels.forEach(el => {
+      el.textContent = isFR ? el.getAttribute("data-en") : el.getAttribute("data-fr");
+    });
+    langToggle.textContent = isFR ? "FR" : "EN";
+    isFR = !isFR;
+  });
+});</script>
+</body>
+</html>
